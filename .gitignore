@@ -1,0 +1,13 @@
+*.config
+*.csproj
+*.user
+*.cmd
+*.sdf
+favicon.ico
+Scripts
+bin
+obj
+Properties
+Content/font-awesome
+Content/glyph*
+App_Data/readme.txt

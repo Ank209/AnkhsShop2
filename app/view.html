@@ -1,0 +1,120 @@
+﻿<div data-ng-controller="ReqController as vm">
+    <header>
+        <h2 style="line-height:2em;">Ankh's Shopping List App</h2>
+        <!--
+        <form data-ng-submit="vm.addItem()">
+            <input type="text"
+                   data-ng-model="vm.newTodoDescription"
+                   placeholder="What needs to be done?" />
+        </form>
+            -->
+
+        <input data-ng-model="requestSearch" placeholder="Search" style="text-align:center" class="full-width">
+        <select data-ng-model="selectedStore" style="height:35px; font-size:1.2em" class="full-width" ng-options="store.StoreName for store in vm.stores" ng-init="selectedStore = vm.stores[0]"></select>
+    </header>
+    <section>
+        <!--<div class="mark-all">
+            <span data-ng-show="vm.items.length">
+                <input id="markAll" type="checkbox"
+                       data-ng-model="vm.allCompleted"
+                       data-ng-click="vm.toggleCompleted()" />
+                <label for="markAll">Mark all as complete </label>
+            </span>
+
+            <input id="includeArchived" type="checkbox"
+                   data-ng-model="vm.includeArchived"
+                   data-ng-click="vm.getTodos()" />
+            <label for="includeArchived" class="archived">Show archived</label>
+        </div>
+        <div>
+            <input type="search" placeholder="Filter by name ..."
+                   data-ng-model="vm.itemFilterText" />
+        </div>
+        <ul>
+            <li data-ng-repeat="item in vm.items | filter:vm.itemFilter">
+
+                <div data-ng-hide="vm.isEditing(item)">
+                    <input type="checkbox"
+                           data-ng-model="item.IsDone"
+                           data-ng-class="{done: item.IsDone}" />
+                    <label data-ng-click="vm.editBegin(item)"
+                           data-ng-class="{done: item.IsDone, archived: item.IsArchived}">
+                        {{item.Description}}
+                    </label>
+                    <a href="" data-ng-click="vm.deleteItem(item)">X</a>
+                </div>
+
+                <div data-ng-show="vm.isEditing(item)">
+                    <form data-ng-submit="vm.editEnd()">
+                        <input type="text" autofocus
+                               data-ng-model="item.Description"
+                               data-ng-blur="vm.editEnd()"
+                               data-ng-mouseout="vm.editEnd()" />
+                    </form>
+                </div>
+            </li>
+
+        </ul>
+
+        <div class="controlLinks">
+            <a href="" data-ng-click="vm.purge()">Purge</a>&nbsp;&nbsp;
+            <a href="" data-ng-click="vm.reset()">Reset</a>
+        </div>-->
+
+        <ul class="list-group list-main" ng-style="{ 'max-height' : vm.maxHeight}">
+            <li data-ng-repeat="request in vm.requests | filter: vm.reqSearchFilter" class="list-group-item list-item" ng-style="{'background-color' : vm.itemColor(request.RequestId), 'color' : vm.itemTextColor(request.RequestId)}">
+                {{request.Amount}}{{request.Unit.UnitName}} {{request.Item.ItemName}} 
+                <!--from {{request.Item.Store.StoreName}} ({{request.User.UserName}})-->
+                <button ng-click="vm.addItem(request.RequestId)" class="btn btn-default list-button" ng-hide="vm.requestAdded(request.RequestId)">Buy</button>
+                <button ng-click="vm.removeItem(request.RequestId)" class="btn btn-success list-button" ng-show="vm.requestAdded(request.RequestId)">Buy</button>
+            </li>
+        </ul>
+        <div class="btn-group fit-width">
+            <button class="btn half-width" ng-click="vm.checkNoSelection(true)" ng-hide="vm.checkNoSelection(false)">Add Items (Disabled)</button>
+            <button class="btn btn-info half-width" ng-click="vm.checkNoSelection(true)" ng-show="vm.checkNoSelection(false)">Add Items To List</button>
+            <button class="btn btn-danger half-width" data-toggle="modal" data-target="#cancelAlert">Cancel Selections</button>
+        </div>
+        <button class="btn btn-success btn-block" data-toggle="modal" data-target="#confirmPurchase">Confirm Purchases</button>
+    </section>
+
+    <div id="cancelAlert" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-sm">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Confirm Erase</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Are you sure you want to erase all of your current selections?</p>
+                </div>
+                <div class="modal-footer">
+                    <div class="btn-group fit-width">
+                        <button type="button" class="btn btn-danger half-width" ng-click="vm.clearSelection()" data-dismiss="modal">Erase</button>
+                        <button type="button" class="btn btn-default half-width" data-dismiss="modal">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="confirmPurchase" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-sm">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Confirm Purchase</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Are you sure you want to mark all selected items as purchased? This will remove them from the shopping list.</p>
+                </div>
+                <div class="modal-footer">
+                    <div class="btn-group fit-width">
+                        <button type="button" class="btn btn-success half-width" ng-click="vm.purchaseSelection()" data-dismiss="modal">Confirm Purchase</button>
+                        <button type="button" class="btn btn-default half-width" data-dismiss="modal">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

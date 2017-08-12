@@ -1,0 +1,13 @@
+﻿<div data-ng-controller="LoginController as vm">
+    <form class="form-signin">
+        <img src="Content/AnkhsShopGlow.png" style="margin-bottom:50px" />
+        <h2 class="form-signin-heading">Please sign in</h2>
+        <input data-ng-model="vm.inputUserName" class="form-control" placeholder="User Name" required autofocus>
+        <input type="password" data-ng-model="vm.inputPassword" class="form-control" placeholder="Password" required>
+        <div class="btn-group fit-width">
+            <button class="btn btn-lg btn-primary half-width" type="submit" ng-click="vm.verifyPassword()">Shopping List</button>
+            <button class="btn btn-lg half-width" type="submit" ng-click="vm.verifyPassword()">Movie List</button>
+        </div>
+        <label ng-show="vm.attempts > 0" style="color:red;text-align: center;">Login Failed, Please check your credentials and try again ({{vm.attempts}})</label>
+    </form>
+</div>

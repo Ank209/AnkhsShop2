@@ -1,0 +1,48 @@
+﻿<div data-ng-controller="MovieController as vm">
+    <header>
+        <h2 style="line-height:2em;">Ankh's Movie List</h2>
+        <input data-ng-model="movieSearch" placeholder="Search" style="text-align:center" class="full-width">
+    </header>
+    <section>
+        <ul class="list-group list-main" ng-style="{ 'max-height' : vm.maxHeight}">
+            <li data-ng-repeat="movie in vm.movies | filter: vm.movieSearchFilter" class="list-group-item list-item" ng-style="{'background-color' : vm.movieColor(movie.BluRay), 'color' : vm.movieTextColor(movie.BluRay)}">
+                {{movie.MainTitle}}{{vm.showSecTitle(movie.SecondaryTitle)}}{{vm.sequelNum(movie.SequelNum)}}
+            </li>
+        </ul>
+        <div class="btn-group fit-width">
+            <button class="btn btn-default half-width" data-toggle="modal" onclick="location.href = '#';" data-target="#confirmPurchase">Back</button>
+            <button class="btn btn-success half-width" data-toggle="modal" data-target="#addMovie">Add Movie</button>
+        </div>
+    </section>
+    <div id="addMovie" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-sm">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" style="text-align:center">Add New Movie</h4>
+                </div>
+                <div class="modal-body">
+                    <label ng-show="vm.inputError" style="color:red;text-align: center;">Input Error, Is the sequel number correct?</label>
+                    <p>
+                        Name:
+                        <input data-ng-model="vm.newMovieName" placeholder="Movie Name" class="full-width">
+                    </p>
+                    <p>
+                        Number in Series:
+                        <input data-ng-model="vm.newMovieSequelNum" placeholder="Series Number" class="half-width">
+                    </p>
+                    <p>
+                        BluRay?:
+                        <select data-ng-model="vm.selectedBluRayOption" class="half-width" ng-options="bluRayOption for bluRayOption in vm.bluRayOptions" ng-init="vm.selectedBluRayOption = vm.bluRayOptions[0]"></select>
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <div class="btn-group fit-width">
+                        <button type="button" class="btn btn-danger half-width" ng-click="vm.inputError = false" data-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-success half-width" ng-click="vm.addMovie()">Confirm</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,85 @@
+﻿<div data-ng-controller="NewReqController as vm">
+    <header>
+        <h2 style="line-height:2em;">Request an Item</h2>
+
+        <input data-ng-model="itemSearch" placeholder="Search" style="text-align:center" class="full-width">
+        <select data-ng-model="selectedItemType" style="height:35px; font-size:1.2em" class="full-width" ng-options="itemtype.ItemTypeName for itemtype in vm.itemtypes" ng-init="selectedItemType = vm.itemtypes[0]"></select>
+    </header>
+    <section>
+        <ul class="list-group list-main" ng-style="{ 'max-height' : vm.maxHeight}">
+            <li data-ng-repeat="item in vm.items | filter: vm.itemSearchFilter" class="list-group-item list-item"> <!--ng-style="{'background-color' : vm.itemColor(request.RequestId), 'color' : vm.itemTextColor(request.RequestId)}"-->
+                {{item.ItemName}}
+                <button class="btn btn-default list-button" ng-click="vm.selectedItem = item" data-toggle="modal" data-target="#addReq" data-backdrop="static" data-keyboard="false">Add</button>
+                <!--<button ng-click="vm.removeItem(request.RequestId)" class="btn btn-success list-button" ng-show="vm.requestAdded(request.RequestId)">Buy</button>-->
+            </li>
+        </ul>
+        <div class="btn-group fit-width">
+            <button class="btn btn-primary half-width" onclick="location.href='#view';">Back to List</button>
+            <button class="btn half-width" data-toggle="modal" data-target="#addNewItem">Add Unlisted Item</button>
+        </div>
+    </section>
+    <div id="addReq" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-sm">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" style="text-align:center">{{vm.selectedItem.ItemName}}</h4>
+                </div>
+                <div class="modal-body">
+                    <p>
+                        Amount:
+                        <input data-ng-model="vm.amount" placeholder="Amount" class="half-width">
+                        <input class="styled-checkbox" id="styled-checkbox-1" type="checkbox" data-ng-model="vm.selectedUnit">
+                        <label for="styled-checkbox-1">Kg</label>
+                        <!--<select data-ng-model="selectedUnit" ng-options="unit.UnitName for unit in vm.units" ng-init="selectedUnit = vm.units[0]"></select>-->
+                    </p>
+                    <p>
+                        Frequency:
+                        <input data-ng-model="vm.frequency" placeholder="Days" class="half-width">
+                        days
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <div class="btn-group fit-width">
+                        <button type="button" class="btn btn-success half-width" ng-click="vm.requestItem()" data-dismiss="modal">Confirm</button>
+                        <button type="button" class="btn btn-danger half-width" data-dismiss="modal">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="addNewItem" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-sm">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" style="text-align:center">Add New Item to Dictionary</h4>
+                </div>
+                <div class="modal-body" style="line-height:1.3em;font-size:1.2em" >
+                    <p>
+                        Item Name:
+                        <input data-ng-model="vm.newItemName" placeholder="Name" class="fit-width">
+                    </p>
+                    <p>
+                        Type:
+                        <select data-ng-model="vm.newSelectedItemType" class="fit-width" ng-options="itemtype.ItemTypeName for itemtype in vm.itemtypes" ng-init="vm.newSelectedItemType = vm.itemtypes[0]"></select>
+                    </p>
+                    <p>
+                        Store:
+                        <select data-ng-model="vm.newSelectedStore" class="fit-width" ng-options="store.StoreName for store in vm.stores" ng-init="vm.newSelectedStore = vm.stores[0]"></select>
+                    </p>
+                    <p>
+                        Aisle:
+                        <input data-ng-model="vm.newItemAisle" placeholder="Aisle" class="fit-width">
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <div class="btn-group fit-width">
+                        <button type="button" class="btn btn-success half-width" ng-click="vm.addItem()" data-dismiss="modal">Add Item</button>
+                        <button type="button" class="btn btn-danger half-width" data-dismiss="modal">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
