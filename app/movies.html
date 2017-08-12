@@ -22,18 +22,23 @@
                     <h4 class="modal-title" style="text-align:center">Add New Movie</h4>
                 </div>
                 <div class="modal-body">
-                    <label ng-show="vm.inputError" style="color:red;text-align: center;">Input Error, Is the sequel number correct?</label>
-                    <p>
-                        Name:
-                        <input data-ng-model="vm.newMovieName" placeholder="Movie Name" class="full-width">
+                    <label ng-show="vm.inputError" style="color:red;text-align: center;">Input Error, Is the series number correct?</label>
+                    <p class="input-title">
+                        Main Title:
+                        <input data-ng-model="vm.newMovieTitle" placeholder="e.g. Avengers" class="full-width">
                     </p>
                     <p>
-                        Number in Series:
+                        <p class="input-title">Secondary Title:</p>
+                        <input data-ng-model="vm.newMovieSecTitle" placeholder="e.g. Age of Ultron" class="full-width">
+                    </p>
+                    <p>
+                        <p class="input-title">Number in Series:</p>
                         <input data-ng-model="vm.newMovieSequelNum" placeholder="Series Number" class="half-width">
                     </p>
-                    <p>
-                        BluRay?:
-                        <select data-ng-model="vm.selectedBluRayOption" class="half-width" ng-options="bluRayOption for bluRayOption in vm.bluRayOptions" ng-init="vm.selectedBluRayOption = vm.bluRayOptions[0]"></select>
+                    <p class="input-title">
+                        BluRay?
+                        <input class="styled-checkbox" id="styled-checkbox-1" type="checkbox" data-ng-model="vm.selectedBluRayOption">
+                        <label for="styled-checkbox-1"></label>
                     </p>
                 </div>
                 <div class="modal-footer">

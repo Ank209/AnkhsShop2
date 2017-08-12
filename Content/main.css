@@ -74,6 +74,14 @@ section {
     line-height: 1;
 }
 
+.input-title {
+    font-weight:bold !important; 
+    padding-top: 10px;
+}
+input {
+    font-weight:normal;
+}
+
 ::-webkit-scrollbar {
     width: 0px; /* remove scrollbar space */
     background: transparent; /* optional: just make scrollbar invisible */
@@ -151,7 +159,7 @@ section {
     vertical-align: text-top;
     width: 20px;
     height: 20px;
-    background: #b8b8b8;
+    background: #ff0000;
     box-shadow: 0 0 0 3px rgba(0, 0, 0, 1);
   }
 
@@ -196,12 +204,14 @@ section {
   }
 
   .styled-checkbox:not(:checked) + label:after {
-    content: '';
-    font-family: FontAwesome;
+    content: 'x';
+    font-family: "Segoe UI", Arial, Helvetica, sans-serif;
     color: white;
     position: absolute;
-    left: 3px;
-    top: 2px;
+    font-weight: normal;
+    font-size: 1.2em;
+    left: 6px;
+    top: -2px;
   }
 
 

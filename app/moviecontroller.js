@@ -90,17 +90,24 @@
             if (isNaN(vm.newMovieSequelNum) || vm.newMovieSequelNum == 0) {
                 // Sequel Num entered incorrectly
                 vm.inputError = true;
+            } else if (vm.newMovieTitle == undefined) {
+                // Main Title Missing
+                vm.inputError = true;
             } else {
                 // Attempt Database entry
                 // Close Modal
                 vm.inputError = false;
                 $('#addMovie').modal('toggle');
             }
-            logger.log("Name: " + vm.newMovieName);
+            logger.log("------------------------------");
+            logger.log("Name: " + vm.newMovieTitle + ": " + vm.newMovieSecTitle);
             logger.log("SequelNum: " + vm.newMovieSequelNum);
             logger.log("BluRay: " + vm.selectedBluRayOption);
             logger.log("Valid: " + !vm.inputError);
-            vm.newMovieName = undefined;
+            vm.newMovieTitle = undefined;
+            vm.newMovieSecTitle = undefined;
+            vm.newMovieSequelNum = undefined;
+            vm.selectedBluRayOption = false;
         }
     }
 })();
